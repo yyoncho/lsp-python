@@ -17,3 +17,4 @@
   :name "Python Language Server")
 
 (provide 'lsp-python)
+;;; lsp-python.el ends here
