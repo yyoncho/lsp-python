@@ -12,7 +12,6 @@
 (require 'lsp-common)
 (require 'python)
 
-;;;###autoload
 (lsp-define-stdio-client 'python-mode "python" 'stdio
 			 (lsp-make-traverser #'(lambda (dir)
 						 (directory-files
