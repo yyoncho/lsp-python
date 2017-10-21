@@ -4,21 +4,20 @@
 
 ;; Author: Vibhav Pant <vibhavp@gmail.com>
 ;; Version: 1.0
-;; Package-Requires: ((lsp-mode "2.0"))
+;; Package-Requires: ((lsp-mode "3.0"))
 ;; Keywords: python
 ;; URL: https://github.com/emacs-lsp/lsp-python
 
+;;; Code:
 (require 'lsp-mode)
 (require 'lsp-common)
-(require 'python)
 
-(lsp-define-stdio-client 'python-mode "python" 'stdio
+(lsp-define-stdio-client lsp-python "python"
 			 (lsp-make-traverser #'(lambda (dir)
 						 (directory-files
 						  dir
 						  nil
 						  "\\(__init__\\|setup\\)\\.py")))
-			 "Python Language Server"
 			 '("pyls"))
 
 (provide 'lsp-python)
