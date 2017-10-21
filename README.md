@@ -10,5 +10,5 @@ this repository, or install from MELPA. Add the following to your `.emacs`:
 ```emacs-lisp
 (require 'lsp-mode)
 (require 'lsp-python)
-(add-hook 'python-mode-hook #'lsp-mode)
+(add-hook 'python-mode-hook #'lsp-python-enable)
 ```
