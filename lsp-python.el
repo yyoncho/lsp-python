@@ -1,4 +1,4 @@
-;;; lsp-python.el --- Python support for lsp-mode
+;;; lsp-python.el --- Python support for lsp-mode -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2017 Vibhav Pant <vibhavp@gmail.com>
 
@@ -17,7 +17,7 @@
 						 (directory-files
 						  dir
 						  nil
-						  "\\(__init__\\|setup\\)\\.py")))
+						  "setup.py")))
 			 '("pyls"))
 
 (provide 'lsp-python)
