@@ -17,7 +17,7 @@
 						 (directory-files
 						  dir
 						  nil
-						  "setup.py")))
+              "setup.py\\|Pipfile\\|setup.cfg\\|tox.ini")))
 			 '("pyls"))
 
 (provide 'lsp-python)
