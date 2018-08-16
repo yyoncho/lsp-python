@@ -12,13 +12,25 @@
 (require 'lsp-mode)
 (require 'lsp-common)
 
+(defcustom lsp-python-server-args
+  '()
+  "Extra arguments for the python-stdio language server"
+  :group 'lsp-python
+  :risky t
+  :type '(repeat string))
+
+(defun lsp-python--ls-command ()
+  "Generate the language server startup command."
+  `("pyls" ,@lsp-python-server-args))
+
 (lsp-define-stdio-client lsp-python "python"
 			 (lsp-make-traverser #'(lambda (dir)
 						 (directory-files
 						  dir
 						  nil
               "setup.py\\|Pipfile\\|setup.cfg\\|tox.ini")))
-			 '("pyls"))
+                         nil
+                         :command-fn 'lsp-python--ls-command)
 
 (provide 'lsp-python)
 ;;; lsp-python.el ends here
