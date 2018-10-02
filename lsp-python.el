@@ -23,12 +23,10 @@
   "Generate the language server startup command."
   `("pyls" ,@lsp-python-server-args))
 
-(lsp-define-stdio-client lsp-python "python"
-			 (lsp-make-traverser #'(lambda (dir)
-						 (directory-files
-						  dir
-						  nil
-              "setup.py\\|Pipfile\\|setup.cfg\\|tox.ini")))
+(lsp-define-stdio-client lsp-python
+                         "python"
+                         (lsp-make-traverser #'(lambda (dir)
+                                                 (not (directory-files dir nil "__init__.py"))))
                          nil
                          :command-fn 'lsp-python--ls-command)
 
