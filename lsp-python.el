@@ -19,14 +19,29 @@
   :risky t
   :type '(repeat string))
 
+(defcustom lsp-python-use-init-for-project-root
+  nil
+  "Set to t to look for __init__.py files to determine a project's root.
+
+The first directory not containing an __init__.py file (looking
+upwards from the directory the open python file is in) is set as
+the project root for the lsp server.
+"
+  :group 'lsp-python
+  :type 'boolean)
+
 (defun lsp-python--ls-command ()
   "Generate the language server startup command."
   `("pyls" ,@lsp-python-server-args))
 
-(lsp-define-stdio-client lsp-python
-                         "python"
+(lsp-define-stdio-client lsp-python "python"
                          (lsp-make-traverser #'(lambda (dir)
-                                                 (not (directory-files dir nil "__init__.py"))))
+                                                 (if lsp-python-use-init-for-project-root
+                                                     (not (directory-files dir nil "__init__.py"))
+                                                   (directory-files
+                                                    dir
+                                                    nil
+                                                    "setup.py\\|Pipfile\\|setup.cfg\\|tox.ini"))))
                          nil
                          :command-fn 'lsp-python--ls-command)
 
