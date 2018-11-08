@@ -34,15 +34,7 @@ the project root for the lsp server.
   "Generate the language server startup command."
   `("pyls" ,@lsp-python-server-args))
 
-(lsp-define-stdio-client lsp-python "python"
-                         (lsp-make-traverser #'(lambda (dir)
-                                                 (if lsp-python-use-init-for-project-root
-                                                     (not (directory-files dir nil "__init__.py"))
-                                                   (directory-files
-                                                    dir
-                                                    nil
-                                                    "setup.py\\|Pipfile\\|setup.cfg\\|tox.ini"))))
-                         nil
+(lsp-define-stdio-client lsp-python "python" nil nil
                          :command-fn 'lsp-python--ls-command)
 
 (provide 'lsp-python)
